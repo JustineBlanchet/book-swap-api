@@ -1,0 +1,120 @@
+#####
+# Fichier de test des routes HTTP de l'API
+#####
+
+@endpoint = http://localhost:5999
+
+#########################
+#          USER         #
+#########################
+
+### Login user : Generate token 
+POST {{ endpoint }}/login
+content-type: application/json
+
+{
+    "email": "duke@gmail.com",
+    "password": "azerty1234"
+}
+
+### Login user test
+POST {{ endpoint }}/login
+content-type: application/json
+
+{
+    "email": "test@gmail.com",
+    "password": "azerty1234"
+}
+
+### Create new User
+POST {{ endpoint }}/createuser
+content-type: application/json
+
+{
+    "username": "test",
+    "email": "test@gmail.com",
+    "password": "azerty1234",
+    "passwordConfirm": "azerty1234"
+}
+
+### Get personnal profile informations
+GET {{ endpoint }}/profile
+Authorization: Bearer {token}
+
+### Update profile 
+PATCH {{ endpoint }}/profile
+Authorization: Bearer {token}
+content-type: application/json
+
+{
+    "tel": "0612131416",
+    "zipcode": "75000"
+}
+
+### Delete profile
+DELETE {{ endpoint }}/profile
+Authorization: Bearer {token}
+
+### Get contact informations
+GET {{ endpoint }}/userinfos/test
+
+#########################
+#         LIBRARY       #
+#########################
+
+### Get my library informations
+GET {{ endpoint }}/mylibrary
+Authorization: Bearer {token}
+
+### Add book in my library
+POST {{ endpoint }}/mylibrary/addBook
+Authorization: Bearer {token}
+content-type: application/json
+
+{
+    "googleApiId": "np2VDAAAQBAJ"
+}
+
+### Update library
+POST {{ endpoint }}/mylibrary/book/15
+Authorization: Bearer {token}
+content-type: application/json
+
+{
+    "isAvailable": "true"
+}
+
+#########################
+#          TAGS         #
+#########################
+
+### Get all tags
+GET {{ endpoint }}/tags
+
+### Add tag to user
+POST {{ endpoint }}/addTag
+Authorization: Bearer {token}
+content-type: application/json
+
+{
+    "tagId": "4"
+}
+
+### Remove tag from user
+DELETE {{ endpoint }}/removeTag
+Authorization: Bearer {token}
+content-type: application/json
+
+{
+    "tagId": "4"
+}
+
+#########################
+#         BOOKS         #
+#########################
+
+### Get all books
+GET {{ endpoint }}/books
+
+### Get user by books
+GET {{ endpoint }}/books/AyOyDwAAQBAJ
