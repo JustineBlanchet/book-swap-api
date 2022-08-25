@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "DEBUG=*,-express:*,-nodemon*,-send*,-body-parser* npx nodemon",
-    "resetDB" : "sqitch revert -y; sqitch deploy; psql -U spedata -d obook -f data/seeding.sql"
+    "resetDB": "sqitch revert -y; sqitch deploy; psql -U spedata -d obook -f data/seeding.sql"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-jsdoc-swagger": "^1.8.0",
+    "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.3"
   },

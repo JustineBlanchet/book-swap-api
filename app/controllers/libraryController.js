@@ -3,6 +3,7 @@ const Book = require('../models/Book');
 const User = require('../models/User');
 const Loan = require('../models/Loan');
 const ClientError = require('../errors/clientError');
+const Tag = require('../models/Tag');
 
 const libraryController = {
     async myLibrary(req) {
@@ -10,6 +11,7 @@ const libraryController = {
         const id = Number(req.user.id);
         // Récupérer les infos de profil de l'utilisateur
         const user = await User.getProfileInformations(id);
+        const tags = await Tag.getTagsByUserId(id);
         // Récupérer les livres en librairie de l'utilisateur
         const libraries = await Library.findSome('user_id', id);
         const books = [];
@@ -24,7 +26,8 @@ const libraryController = {
         const borrow = await Loan.getLoanByUser(id);
         // Prêts utilisateur
         return {
-            usersInfos: user,
+            userInfos: user,
+            tags,
             books,
             lends,
             borrow,
@@ -38,16 +41,16 @@ const libraryController = {
 
     async addBookInLibrary(req, res) {
         // Ajouter un livre à la librairie d'un utilisateur
-        // Récupération du googleApiId
-        const { googleApiId } = req.body;
+        // Récupération du numéro ISBN du livre
+        const { isbn } = req.body;
         // Récupération du userId
         const userId = Number(req.user.id);
 
         // Vérifier si le livre existe déjà en BDD
-        const book = await Book.findOne('google_api_id', googleApiId);
+        const book = await Book.findOne('isbn', isbn);
         let bookId;
         if (!book) {
-            const newBook = new Book(googleApiId);
+            const newBook = new Book(isbn);
             const insertedBook = await newBook.insert();
             bookId = insertedBook.id;
         } else {
@@ -98,8 +101,14 @@ const libraryController = {
     async getLibrary(req, res) {
         // Récupérer les infos de librairie d'un autre utiliateur
         const { username } = req.params;
-        const library = await Library.getUserLibraryDetails(username);
-        res.json(library);
+        const userInfos = await User.getUserInformations(username);
+        const tags = await Tag.getTagsByUserId(userInfos.id);
+        const books = await Book.getBooksByUserId(userInfos.id);
+        res.json({
+            userInfos,
+            tags,
+            books,
+        });
     },
 };
 

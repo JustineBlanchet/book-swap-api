@@ -6,10 +6,25 @@ const client = require('../config/db');
 /**
  * "Loan" Model Object
  * @typedef {object} LoanModel
+ * @property {number} id - Loan id
  * @property {string} status - Loan status
- * @property {date} loanDate - Loan date
+ * @property {string} loanDate - Loan date
  * @property {number} libraryId - Library id who lends the book
  * @property {number} userId - User id who borrows the book
+ * @property {string} created_at - Loan's creation date
+ * @property {string} updated_at - Loan's update date
+ */
+
+/**
+ * "AddLoan" Model Object
+ * @typedef {object} AddLoanModel
+ * @property {string} libraryId - Library identifier who owns the book
+ */
+
+/**
+ * "UpdateLoan" Model Object
+ * @typedef {object} UpdateLoanModel
+ * @property {string} status - Status of the loan
  */
 
 module.exports = class Loan extends CoreDatamapper {
@@ -24,7 +39,7 @@ module.exports = class Loan extends CoreDatamapper {
     }
 
     static async getLastLoans() {
-        const sql = `SELECT * FROM ${this.tableName} ORDER BY "created_at LIMIT 50`;
+        const sql = `SELECT * FROM ${this.tableName} ORDER BY "created_at" LIMIT 50`;
         const results = await client.query(sql);
         return results.rows;
     }
@@ -57,10 +72,10 @@ module.exports = class Loan extends CoreDatamapper {
         return result.rows[0];
     }
 
-    static async update(loan) {
+    static async update(loan, loanId) {
         const sql = {
-            text: 'SELECT * FROM update_loan($1)',
-            values: [loan],
+            text: 'SELECT * FROM update_loan($1, $2)',
+            values: [loan, loanId],
         };
         const result = await client.query(sql);
         return result.rows[0];
@@ -68,7 +83,7 @@ module.exports = class Loan extends CoreDatamapper {
 
     async insert() {
         const sql = {
-            text: 'SELECT * FROM insert_loan($1, $2)',
+            text: 'SELECT * FROM create_loan($1, $2)',
             values: [this.user_id, this.library_id],
         };
 

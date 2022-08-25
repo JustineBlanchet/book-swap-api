@@ -27,7 +27,7 @@ app.use(router);
 
 // 404 API
 app.use((req, res, next) => {
-    next(new ApiError('endpoint not found', { statusCode: 404 }));
+    next(new ApiError('Endpoint not found', { statusCode: 404 }));
 });
 
 // Middleware de gestion d'erreurs

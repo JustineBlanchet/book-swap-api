@@ -72,16 +72,44 @@ Authorization: Bearer {token}
 content-type: application/json
 
 {
-    "googleApiId": "np2VDAAAQBAJ"
+    "isbn": "np2VDAAAQBAJ"
 }
 
 ### Update library
-POST {{ endpoint }}/mylibrary/book/15
+PATCH {{ endpoint }}/mylibrary/book/15
 Authorization: Bearer {token}
 content-type: application/json
 
 {
     "isAvailable": "true"
+}
+
+### Get user library
+GET {{ endpoint }}/library/Duke
+
+#########################
+#          LOANS        #
+#########################
+
+### Get all loans
+GET {{ endpoint }}/loans
+
+### Generate loan
+POST {{ endpoint }}/loan
+Authorization: Bearer {token}
+content-type: application/json
+
+{
+    "libraryId": "7"
+}
+
+### Update loan
+PATCH {{ endpoint }}/loan/6
+Authorization: Bearer {token}
+content-type: application/json
+
+{
+    "status":"Validé"
 }
 
 #########################
@@ -117,4 +145,4 @@ content-type: application/json
 GET {{ endpoint }}/books
 
 ### Get user by books
-GET {{ endpoint }}/books/AyOyDwAAQBAJ
+GET {{ endpoint }}/book/AyOyDwAAQBAJ

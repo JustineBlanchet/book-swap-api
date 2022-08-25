@@ -6,9 +6,33 @@ const client = require('../config/db');
 /**
  * "Library" Model Object
  * @typedef {object} LibraryModel
+ * @property {number} id - Library id
  * @property {number} user_id - User id
  * @property {number} book_id - Book id
  * @property {boolean} is_available - Availability of the book
+ * @property {string} created_at - Library's creation date
+ * @property {string} updated_at - Library's update date
+ */
+
+/**
+ * "PersonnalLibrary" Model Object
+ * @typedef {object} PersonnalLibraryModel
+ * @property {UserModel} userInfos - User personnal informations
+ * @property {BookModel} books - User's books
+ * @property {LoanModel} lends - User's lends
+ * @property {LoanModel} borrow - User's borrow
+ */
+
+/**
+ * "AddLibrary" Model Object
+ * @typedef {object} AddLibraryModel
+ * @property {string} isbn - Book's ISBN number
+ */
+
+/**
+ * "UpdateLibrary" Model Object
+ * @typedef {object} UpdateLibraryModel
+ * @property {boolean} isAvailable - Availability of the book
  */
 
 module.exports = class Library extends CoreDatamapper {
@@ -34,7 +58,7 @@ module.exports = class Library extends CoreDatamapper {
     // eslint-disable-next-line class-methods-use-this
     static async getUserLibraryDetails(username) {
         const sql = {
-            text: 'SELECT * FROM user_library_details WHERE "user"."id"=$1',
+            text: 'SELECT * FROM user_library_details WHERE username=$1',
             values: [username],
         };
         const results = await client.query(sql);
@@ -42,10 +66,10 @@ module.exports = class Library extends CoreDatamapper {
     }
 
     // eslint-disable-next-line class-methods-use-this
-    static async isBookInLibrary(googleApiId) {
+    static async isBookInLibrary(isbn) {
         const sql = {
-            text: 'SELECT * FROM "book_in_library" WHERE "book"."google_api_id" = $1',
-            values: [googleApiId],
+            text: 'SELECT * FROM "book_in_library" WHERE "isbn" = $1',
+            values: [isbn],
         };
         const results = await client.query(sql);
         return results.rows;

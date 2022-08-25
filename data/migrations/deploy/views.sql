@@ -15,7 +15,7 @@ SELECT
     "library"."id" as libraryId,
     "library"."is_available",
     "book"."id" as bookId,
-    "book"."google_api_id"
+    "book"."isbn"
 FROM "tag"
 JOIN "user_has_tag" ON "user_has_tag"."tag_id" = "tag"."id"
 JOIN "user" ON "user"."id" = "user_has_tag"."user_id"
@@ -30,7 +30,8 @@ SELECT
     "user"."zipcode",
     "user"."localisation",
     "user"."profile_picture",
-    "library"."id" as libraryId
+    "library"."id" as libraryId,
+    "book"."isbn"
 FROM "user"
 JOIN "library" ON "library"."user_id" = "user"."id"
 JOIN "book" ON "book"."id" = "library"."book_id"
@@ -68,7 +69,7 @@ SELECT
 	"user"."username",
 	"user"."profile_picture",
     "library"."id" as libraryId,
-    "book"."google_api_id"
+    "book"."isbn"
 FROM "loan"
 JOIN "library" ON "library"."id" = "loan"."library_id"
 JOIN "user" ON "user"."id" = "loan"."user_id"

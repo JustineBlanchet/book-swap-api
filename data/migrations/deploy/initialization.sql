@@ -51,7 +51,7 @@ CREATE TABLE "user" (
 
 CREATE TABLE "book" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "google_api_id" TEXT NOT NULL UNIQUE,
+    "isbn" TEXT NOT NULL UNIQUE,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ DEFAULT NULL
 );

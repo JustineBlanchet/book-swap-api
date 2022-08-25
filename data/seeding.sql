@@ -23,7 +23,7 @@ INSERT INTO "user" ("username", "password", "email") VALUES
 ('Jacks' , '$2b$10$sdm9dxE/dDAV..RtpsMTnOX5fSuINvHeXfgG4LGXt/1ZJc.oNfj02' , 'jacks@gmail.com') 
 ;
 
-INSERT INTO "book" ("google_api_id") VALUES 
+INSERT INTO "book" ("isbn") VALUES 
 ('5vpGywEACAAJ'), -- Signal - Chattam
 ('AyOyDwAAQBAJ'), -- Un(e) secte - Chattam
 ('Nw2p98GuXC8C'), -- Archanes du chaos - Chattam

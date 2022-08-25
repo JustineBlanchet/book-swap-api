@@ -8,6 +8,12 @@ const options = {
         description: "Projet fin d'étude O'Book",
 
     },
+    security: {
+        BearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+        },
+    },
     baseDir: __dirname,
     // Glob pattern to find your jsdoc files (multiple patterns can be added in an array)
     filesPattern: '../**/*.js', // Tous ce qui se trouve dans /app

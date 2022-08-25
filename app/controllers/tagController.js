@@ -1,9 +1,9 @@
 const Tag = require('../models/Tag');
-const { ClientError } = require('../errors/clientError');
+const ClientError = require('../errors/clientError');
 
 const tagController = {
 
-    async getTags(req, res) {
+    async getTags(_, res) {
         // Récupérer tous les tags
         const tags = await Tag.findAll();
         res.json(tags);

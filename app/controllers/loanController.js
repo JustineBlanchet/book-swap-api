@@ -17,13 +17,12 @@ const loanController = {
         }
 
         // Création d'un nouvel emprunt
-        const newLoan = new Loan({
+        const loan = new Loan({
             userId,
             libraryId,
         });
 
-        await newLoan.insert();
-        newLoan.reload();
+        const newLoan = await loan.insert();
         res.json(newLoan);
     },
 
@@ -38,11 +37,11 @@ const loanController = {
             throw new ClientError('This loan does not exist');
         }
 
-        const updatedLoan = await Loan.update({ ...req.body });
+        const updatedLoan = await Loan.update({ ...req.body }, loanId);
         res.json(updatedLoan);
     },
 
-    async getLoans(req, res) {
+    async getLoans(_, res) {
         // Récupérer les derniers emprunts effectués
         const loans = await Loan.getLastLoans();
         res.json(loans);

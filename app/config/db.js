@@ -5,7 +5,7 @@ const { Pool } = require('pg');
 const dbConfig = {
     connectionString: process.env.DATABASE_URL,
 };
-
+// Afin d'afficher les paramettres sql dans le terminal
 // Création d'une nouvelle piscine
 const pool = new Pool(dbConfig);
 
