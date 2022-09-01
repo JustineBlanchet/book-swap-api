@@ -1,4 +1,5 @@
 const Loan = require('../models/Loan');
+const Library = require('../models/Library');
 const ClientError = require('../errors/clientError');
 
 const loanController = {
@@ -21,6 +22,9 @@ const loanController = {
             userId,
             libraryId,
         });
+
+        // On rend le livre indisponible
+        await Library.update('false', libraryId);
 
         const newLoan = await loan.insert();
         res.json(newLoan);

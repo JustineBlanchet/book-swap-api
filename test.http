@@ -76,13 +76,16 @@ content-type: application/json
 }
 
 ### Update library
-PATCH {{ endpoint }}/mylibrary/book/15
+PATCH {{ endpoint }}/mylibrary/book/6
 Authorization: Bearer {token}
 content-type: application/json
 
 {
     "isAvailable": "true"
 }
+
+### Get user loaner informations
+GET {{ endpoint }}/library/2
 
 ### Get user library
 GET {{ endpoint }}/library/Duke
@@ -109,7 +112,7 @@ Authorization: Bearer {token}
 content-type: application/json
 
 {
-    "status":"Validé"
+    "status":"En cours"
 }
 
 #########################

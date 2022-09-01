@@ -20,8 +20,9 @@ const libraryController = {
             const book = await Book.getBookByLibraryId(library.id);
             books.push(book);
             const lend = await Loan.getLoanByLibrary(library.id);
-            lends.push(lend);
+            lends.push(...lend);
         });
+        lends.filter((lend) => lend.status !== 'Terminé');
         // Emprunts utilisateur
         const borrow = await Loan.getLoanByUser(id);
         // Prêts utilisateur
@@ -72,13 +73,17 @@ const libraryController = {
         const libraryId = Number(req.params.id);
         // Récupération de l'information isAvailable
         const { isAvailable } = req.body;
-
         // Vérifier si l'entrée en librairie existe bien
         const library = await Library.findByPk(libraryId);
         if (!library) {
             throw new ClientError('This library does not exist');
         }
 
+        // Vérifier que le livre n'est pas emprunté
+        const isLoan = await Loan.getLoanByLibrary(libraryId);
+        if (isLoan.status === 'En cours' || isLoan.status === 'En attente de validation') {
+            throw new ClientError("Can't update availability, loan ongoing");
+        }
         // Modification de la librairie
         const updatedLibrary = await Library.update(isAvailable, libraryId);
 
@@ -109,6 +114,16 @@ const libraryController = {
             tags,
             books,
         });
+    },
+
+    async getUserInfosByLibrary(req, res) {
+        // Récupérer les infos utilisateur à partir d'une librairie
+        const libraryId = Number(req.params.id);
+        const userInfos = await User.getUserInfosByLibrary(libraryId);
+        if (!userInfos) {
+            throw new ClientError('This library does not exist');
+        }
+        res.json(userInfos);
     },
 };
 

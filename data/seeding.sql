@@ -24,15 +24,15 @@ INSERT INTO "user" ("username", "password", "email") VALUES
 ;
 
 INSERT INTO "book" ("isbn") VALUES 
-('5vpGywEACAAJ'), -- Signal - Chattam
-('AyOyDwAAQBAJ'), -- Un(e) secte - Chattam
-('Nw2p98GuXC8C'), -- Archanes du chaos - Chattam
-('np2VDAAAQBAJ'), -- Seigneur des anneaux (1) - Tolkien
-('eZ2VDAAAQBAJ'), -- Seigneur des anneaux (2) - Tolkien
-('tdkqDQAAQBAJ'), -- Seigneur des anneaux (3) - Tolkien
-('JLs1EAAAQBAJ'), -- Attaque des titans - Isayama
-('ewx7jgEACAAJ'), -- Harry Potter (1) - J.K Rowling
-('xaWRzQEACAAJ') -- 1984 - Orwell
+('2226319484'), -- Signal - Chattam
+('2298157596'), -- Un(e) secte - Chattam
+('2266194453'), -- Archanes du chaos - Chattam
+('2266154117'), -- Seigneur des anneaux (1) - Tolkien
+('2253012084'), -- Seigneur des anneaux (2) - Tolkien
+('2070501426'), -- Seigneur des anneaux (3) - Tolkien
+('2070541274'), -- Harry Potter (1) - J.K Rowling
+('178110106X'), -- Harry Potter (4) - J.K Rowling
+('0452284236') -- 1984 - Orwell
 ;
 
 INSERT INTO "library" ("user_id", "book_id") VALUES 

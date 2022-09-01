@@ -18,7 +18,7 @@ const client = require('../config/db');
  * "PersonnalLibrary" Model Object
  * @typedef {object} PersonnalLibraryModel
  * @property {UserModel} userInfos - User personnal informations
- * @property {BookModel} books - User's books
+ * @property {BookInLibraryModel} books - User's books
  * @property {LoanModel} lends - User's lends
  * @property {LoanModel} borrow - User's borrow
  */
@@ -77,7 +77,7 @@ module.exports = class Library extends CoreDatamapper {
 
     static async update(isAvailable, libraryId) {
         const sql = {
-            text: 'SELECT * FROM update_library($1, $2)',
+            text: 'SELECT "id" as libraryId, "user_id", "book_id", "is_available" FROM update_library($1, $2)',
             values: [isAvailable, libraryId],
         };
         const result = await client.query(sql);

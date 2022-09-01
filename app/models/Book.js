@@ -10,6 +10,15 @@ const client = require('../config/db');
  * @property {string} updated_at - Book's update date
 */
 
+/**
+ * "BookInLibrary" Model Object
+ * @typedef {object} BookInLibraryModel
+ * @property {number} bookId - Book id
+ * @property {string} isbn - ISBN number of the book
+ * @property {string} libraryId - Library id
+ * @property {boolean} is_available - Book availability
+*/
+
 module.exports = class Book extends CoreDatamapper {
     static tableName = 'book';
 
@@ -26,7 +35,7 @@ module.exports = class Book extends CoreDatamapper {
 
     static async getBookByLibraryId(libraryId) {
         const sql = {
-            text: `SELECT "book"."id", "book"."isbn" FROM ${this.tableName} JOIN "library" ON "library"."book_id" = "book"."id" WHERE "library"."id"=$1`,
+            text: `SELECT "book"."id" as bookId, "book"."isbn", "library"."id" as libraryId, "library"."is_available" FROM ${this.tableName} JOIN "library" ON "library"."book_id" = "book"."id" WHERE "library"."id"=$1`,
             values: [libraryId],
         };
 

@@ -61,6 +61,13 @@ const client = require('../config/db');
  * @property {LoanModel} borrow - User's borrow
  */
 
+/**
+ * "UserLendInfos" Model Object
+ * @typedef {object} UserLendInfosModel
+ * @property {string} username - User pseudo
+ * @property {string} profile_picture - User profile picture
+ */
+
 module.exports = class User extends CoreDatamapper {
     static tableName = 'user';
 
@@ -106,6 +113,15 @@ module.exports = class User extends CoreDatamapper {
         };
         const result = await client.query(sql);
         return result.rows[0];
+    }
+
+    static async getUserInfosByLibrary(id) {
+        const sql = {
+            text: `SELECT "user"."username" as lenderUsername, "user"."profile_picture" as lendenProfilePic FROM "${this.tableName}" JOIN "library" ON "library"."user_id" = "user"."id" WHERE "library"."id"=$1`,
+            values: [id],
+        };
+        const results = await client.query(sql);
+        return results.rows[0];
     }
 
     async create() {

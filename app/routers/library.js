@@ -60,9 +60,20 @@ router.patch('/mylibrary/book/:id', auth, controllerHandler(libraryController.up
   */
 router.delete('/mylibrary/book/:id', auth, controllerHandler(libraryController.deleteBookFromLibrary));
 
-// Récupérer les informations de librairie d'un autre utiliateur
+// Récupérer les infos utilisateur à partir d'un id de librairie
 /**
  * GET /library/:id
+ * @summary Get other user library
+ * @tags Library
+ * @param {number} id.path.required - Library's identifier
+ * @return {UserLendInfosModel} 200 - success response - application/json
+ * @return {ClientError} 400 - user error response - application/json
+ */
+router.get('/library/:id', controllerHandler(libraryController.getUserInfosByLibrary));
+
+// Récupérer les informations de librairie d'un autre utiliateur
+/**
+ * GET /library/:username
  * @summary Get other user library
  * @tags Library
  * @param {number} username.path.required - User's username

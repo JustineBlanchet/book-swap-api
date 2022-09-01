@@ -14,6 +14,8 @@ CREATE DOMAIN tel AS TEXT
     )
 ;
 
+CREATE TYPE lend_status AS ENUM ('En attente de validation', 'En cours', 'Terminé');
+
 CREATE DOMAIN french_zipcode AS TEXT
     CHECK(
         VALUE ~ '^0[1-9]\d{3}$' -- code postaux metropole de 01 a 09
@@ -67,7 +69,7 @@ CREATE TABLE "library" (
 
 CREATE TABLE "loan" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "status" TEXT NOT NULL,
+    "status" lend_status NOT NULL,
     "date" TIMESTAMPTZ DEFAULT NULL, 
     "user_id" INT NOT NULL REFERENCES "user"("id"),
     "library_id" INT NOT NULL REFERENCES "library"("id"),
