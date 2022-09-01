@@ -1,5 +1,5 @@
-const Tag = require('../models/Tag');
-const ClientError = require('../errors/clientError');
+const Tag = require('../../models/Tag');
+const ClientError = require('../../errors/clientError');
 
 const tagController = {
 

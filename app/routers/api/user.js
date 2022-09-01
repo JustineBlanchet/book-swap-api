@@ -1,11 +1,11 @@
 const express = require('express');
 
 // Import des helpers nécessaires
-const controllerHandler = require('../helpers/controllerHandler');
-const auth = require('../middlewares/auth');
+const controllerHandler = require('../../helpers/controllerHandler');
+const auth = require('../../middlewares/auth');
 
 // Import des controllers
-const userController = require('../controllers/userController');
+const userController = require('../../controllers/api/userController');
 
 // Création router express
 const router = express.Router();

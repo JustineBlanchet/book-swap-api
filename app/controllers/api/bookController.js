@@ -1,5 +1,5 @@
-const Book = require('../models/Book');
-const Library = require('../models/Library');
+const Book = require('../../models/Book');
+const Library = require('../../models/Library');
 
 const bookController = {
     async getBooks(_, res) {

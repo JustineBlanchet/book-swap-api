@@ -117,7 +117,7 @@ module.exports = class User extends CoreDatamapper {
 
     static async getUserInfosByLibrary(id) {
         const sql = {
-            text: `SELECT "user"."username" as lenderUsername, "user"."profile_picture" as lendenProfilePic FROM "${this.tableName}" JOIN "library" ON "library"."user_id" = "user"."id" WHERE "library"."id"=$1`,
+            text: `SELECT "user"."username" as lenderUsername, "user"."profile_picture" as lenderProfilePic FROM "${this.tableName}" JOIN "library" ON "library"."user_id" = "user"."id" WHERE "library"."id"=$1`,
             values: [id],
         };
         const results = await client.query(sql);

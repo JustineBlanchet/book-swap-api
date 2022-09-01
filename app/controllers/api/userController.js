@@ -1,8 +1,8 @@
 const { hashSync, compareSync } = require('bcrypt');
-const AuthError = require('../errors/authError');
-const ClientError = require('../errors/clientError');
-const jwt = require('../helpers/jwt');
-const User = require('../models/User');
+const AuthError = require('../../errors/authError');
+const ClientError = require('../../errors/clientError');
+const jwt = require('../../helpers/jwt');
+const User = require('../../models/User');
 const libraryController = require('./libraryController');
 
 const userController = {

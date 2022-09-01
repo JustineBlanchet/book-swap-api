@@ -1,9 +1,9 @@
-const Library = require('../models/Library');
-const Book = require('../models/Book');
-const User = require('../models/User');
-const Loan = require('../models/Loan');
-const ClientError = require('../errors/clientError');
-const Tag = require('../models/Tag');
+const Library = require('../../models/Library');
+const Book = require('../../models/Book');
+const User = require('../../models/User');
+const Loan = require('../../models/Loan');
+const ClientError = require('../../errors/clientError');
+const Tag = require('../../models/Tag');
 
 const libraryController = {
     async myLibrary(req) {

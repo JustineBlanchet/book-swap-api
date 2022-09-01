@@ -1,6 +1,6 @@
-const Loan = require('../models/Loan');
-const Library = require('../models/Library');
-const ClientError = require('../errors/clientError');
+const Loan = require('../../models/Loan');
+const Library = require('../../models/Library');
+const ClientError = require('../../errors/clientError');
 
 const loanController = {
     async generateLoan(req, res) {
