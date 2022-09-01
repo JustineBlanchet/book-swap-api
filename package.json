@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node .",
     "dev": "DEBUG=*,-express:*,-nodemon*,-send*,-body-parser* npx nodemon",
     "resetDB": "sqitch revert -y; sqitch deploy; psql -U spedata -d obook -f data/seeding.sql"
   },
