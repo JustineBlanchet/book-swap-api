@@ -73,13 +73,13 @@ router.get('/library/:id', controllerHandler(libraryController.getUserInfosByLib
 
 // Récupérer les informations de librairie d'un autre utiliateur
 /**
- * GET /library/:username
+ * GET /visitedlibrary/:username
  * @summary Get other user library
  * @tags Library
  * @param {number} username.path.required - User's username
  * @return {LibraryModel} 200 - success response - application/json
  * @return {ClientError} 400 - user error response - application/json
  */
-router.get('/library/:username', controllerHandler(libraryController.getLibrary));
+router.get('/visitedlibrary/:username', controllerHandler(libraryController.getLibrary));
 
 module.exports = router;

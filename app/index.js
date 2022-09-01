@@ -17,7 +17,10 @@ const errorHandler = require('./helpers/errorHandler');
 // Création du serveur express
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:5173',
+}));
 
 // Configuration du moteur de rendu
 app.set('views', path.join(__dirname, 'views'));
