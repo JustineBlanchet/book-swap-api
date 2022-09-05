@@ -34,7 +34,7 @@ const tagController = {
     async removeTagFromUser(req, res) {
         // Supprimer un tag d'un utilisateur
         // Récupération de l'id du tag à supprimer
-        const tagId = Number(req.body.tagId);
+        const tagId = Number(req.params.id);
 
         // Récupération de l'id du user
         const userId = Number(req.user.id);

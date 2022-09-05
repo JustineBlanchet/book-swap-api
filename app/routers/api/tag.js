@@ -39,11 +39,11 @@ router.post('/addtag', auth, controllerHandler(tagController.addTagToUser));
   * @summary Remove tag from user
   * @tags Tag
   * @security BearerAuth
-  * @param {UpdateTagModel} request.body.required - Tag identifier
+  * @param {UpdateTagModel} id.path.required - Tag identifier
   * @return {string} 200 - Association removed - application/json
   * @return {AuthError} 403 - Authentification failed - application/json
   * @return {ClientError} 400 - user error response - application/json
   */
-router.delete('/removetag', auth, controllerHandler(tagController.removeTagFromUser));
+router.delete('/removetag/:id', auth, controllerHandler(tagController.removeTagFromUser));
 
 module.exports = router;
