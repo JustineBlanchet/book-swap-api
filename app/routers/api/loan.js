@@ -25,7 +25,7 @@ router.post('/loan', auth, controllerHandler(loanController.generateLoan));
 
 // Modifier un emprunt
 /**
-  * PATCH /loans/:id
+  * PATCH /loan/:id
   * @summary Update loan status
   * @tags Loan
   * @security BearerAuth

@@ -84,6 +84,15 @@ module.exports = class Library extends CoreDatamapper {
         return result.rows[0];
     }
 
+    static async getLibrariesByUserId(userId) {
+        const sql = {
+            text: `SELECT "library"."id" as libraryId, "library"."is_available", "book"."id" as bookId, "book"."isbn" FROM ${this.tableName} JOIN "book" ON "book"."id" = "library"."book_id" WHERE "library"."user_id"=$1`,
+            values: [userId],
+        };
+        const results = await client.query(sql);
+        return results.rows;
+    }
+
     async insert() {
         const sql = {
             text: 'SELECT * FROM add_book_to_library($1, $2)',

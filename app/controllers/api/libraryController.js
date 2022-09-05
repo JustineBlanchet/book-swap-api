@@ -13,16 +13,15 @@ const libraryController = {
         const user = await User.getProfileInformations(id);
         const tags = await Tag.getTagsByUserId(id);
         // Récupérer les livres en librairie de l'utilisateur
-        const libraries = await Library.findSome('user_id', id);
-        const books = [];
+        const books = await Library.getLibrariesByUserId(id);
         const lends = [];
-        libraries.forEach(async (library) => {
-            const book = await Book.getBookByLibraryId(library.id);
-            books.push(book);
-            const lend = await Loan.getLoanByLibrary(library.id);
+        // eslint-disable-next-line no-restricted-syntax
+        for (const book of books) {
+            // eslint-disable-next-line no-await-in-loop
+            const lend = await Loan.getLoanByLibrary(book.libraryid);
             lends.push(...lend);
-        });
-        lends.filter((lend) => lend.status !== 'Terminé');
+        }
+        const filterLends = lends.filter((lend) => lend.status !== 'Terminé');
         // Emprunts utilisateur
         const borrow = await Loan.getLoanByUser(id);
         // Prêts utilisateur
@@ -30,7 +29,7 @@ const libraryController = {
             userInfos: user,
             tags,
             books,
-            lends,
+            lends: filterLends,
             borrow,
         };
     },
