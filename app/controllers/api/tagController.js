@@ -27,8 +27,12 @@ const tagController = {
             throw new ClientError('Association between tag and user already exist');
         }
 
-        const addTagToUser = await Tag.addTagToUser(tagId, userId);
-        res.json(addTagToUser);
+        // Ajout du nouveau tag à l'utilisateur
+        await Tag.addTagToUser(tagId, userId);
+
+        // Récupération de tous les tags de l'utilisateur
+        const tags = await Tag.getTagsByUserId(userId);
+        res.json(tags);
     },
 
     async removeTagFromUser(req, res) {
@@ -45,8 +49,11 @@ const tagController = {
             throw new ClientError('This association between tag and user does not exist');
         }
 
+        // Suppression de l'association entre l'utilisateur et le tag
         await Tag.removeTagFromUser(tagId, userId);
-        res.status(200).json('Association removed');
+        // Récupération de tous les tags de l'utilisateur
+        const tags = await Tag.getTagsByUserId(userId);
+        res.json(tags);
     },
 
 };
