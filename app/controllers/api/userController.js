@@ -142,17 +142,17 @@ const userController = {
 
     async getContactInfos(req, res) {
         // Récupérer les infos de contact de l'utilisateur prêteur
-        // Récupérer le username de l'utilisateur
-        const { username } = req.params;
+        // Récupérer l'id de l'utilisateur
+        const { id } = req.params;
 
         // Vérifier que l'utilisateur existe bien en BDD
-        const user = await User.findOne('username', username);
+        const user = await User.findByPk(id);
         if (!user) {
             throw new ClientError('This user does not exist');
         }
 
         // Récupérer les infos de contact
-        const contactInfos = await User.getContactInformations(username);
+        const contactInfos = await User.getContactInformations(id);
 
         res.json(contactInfos);
     },

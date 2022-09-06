@@ -96,10 +96,10 @@ module.exports = class User extends CoreDatamapper {
     }
 
     // Informations de contact au moment de l'acceptation d'un prêt
-    static async getContactInformations(username) {
+    static async getContactInformations(id) {
         const sql = {
-            text: 'SELECT * FROM "profile_informations" WHERE "username"=$1',
-            values: [username],
+            text: 'SELECT * FROM "profile_informations" WHERE "id"=$1',
+            values: [id],
         };
         const result = await client.query(sql);
         return result.rows[0];

@@ -37,7 +37,7 @@ module.exports = class Tag extends CoreDatamapper {
 
     static async getTagsByUserId(userId) {
         const sql = {
-            text: `SELECT "tag"."id", "tag"."label" FROM "tag"
+            text: `SELECT "tag"."id", "tag"."label", "tag"."color", "tag"."hover" FROM "tag"
                     JOIN "user_has_tag" ON "user_has_tag"."tag_id" = "tag"."id"
                     WHERE "user_has_tag"."user_id"=$1`,
             values: [userId],

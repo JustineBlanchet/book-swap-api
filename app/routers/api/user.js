@@ -68,13 +68,13 @@ router.route('/profile')
 
 // Récupérer les informations de contact d'un utilisateur
 /**
- * GET /userinfos/:username
+ * GET /userinfos/:id
  * @summary Get contact informations
  * @tags User
- * @param {number} username.path.required - User's username
+ * @param {number} id.path.required - User's identifier
  * @return {UserModel} 200 - success response - application/json
  * @return {ClientError} 400 - user error response - application/json
  */
-router.get('/userinfos/:username', controllerHandler(userController.getContactInfos));
+router.get('/userinfos/:id', controllerHandler(userController.getContactInfos));
 
 module.exports = router;
