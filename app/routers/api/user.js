@@ -71,7 +71,7 @@ router.route('/profile')
  * GET /userinfos/:id
  * @summary Get contact informations
  * @tags User
- * @param {number} id.path.required - User's identifier
+ * @param {number} id.path.required - Library's identifier
  * @return {UserModel} 200 - success response - application/json
  * @return {ClientError} 400 - user error response - application/json
  */

@@ -3,6 +3,7 @@ const AuthError = require('../../errors/authError');
 const ClientError = require('../../errors/clientError');
 const jwt = require('../../helpers/jwt');
 const User = require('../../models/User');
+const Library = require('../../models/Library');
 const libraryController = require('./libraryController');
 
 const userController = {
@@ -142,18 +143,17 @@ const userController = {
 
     async getContactInfos(req, res) {
         // Récupérer les infos de contact de l'utilisateur prêteur
-        // Récupérer l'id de l'utilisateur
+        // Récupérer l'id de la library
         const { id } = req.params;
-
+        const library = await Library.findByPk(id);
         // Vérifier que l'utilisateur existe bien en BDD
-        const user = await User.findByPk(id);
+        const user = await User.findByPk(library.user_id);
         if (!user) {
             throw new ClientError('This user does not exist');
         }
 
         // Récupérer les infos de contact
-        const contactInfos = await User.getContactInformations(id);
-
+        const contactInfos = await User.getContactInformations(user.id);
         res.json(contactInfos);
     },
 
