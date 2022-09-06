@@ -45,7 +45,7 @@ module.exports = class Book extends CoreDatamapper {
 
     static async getBooksByUserId(userId) {
         const sql = {
-            text: `SELECT "book".*, "library"."is_available" FROM book 
+            text: `SELECT "book"."isbn", "book"."id" as bookid, "library"."id" as libraryid, "library"."is_available" FROM book 
                     JOIN "library" ON "library"."book_id" = "book"."id"
                     JOIN "user" ON "user"."id" = "library"."user_id" 
                     WHERE "user"."id"=$1`,

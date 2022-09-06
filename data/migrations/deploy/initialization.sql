@@ -60,8 +60,8 @@ CREATE TABLE "book" (
 
 CREATE TABLE "library" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "user_id" INT NOT NULL REFERENCES "user"("id"),
-    "book_id" INT NOT NULL REFERENCES "book"("id"),
+    "user_id" INT NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
+    "book_id" INT NOT NULL REFERENCES "book"("id") ON DELETE CASCADE,
     "is_available" BOOLEAN NOT NULL DEFAULT false,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ DEFAULT NULL
@@ -71,16 +71,16 @@ CREATE TABLE "loan" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "status" lend_status NOT NULL,
     "date" TIMESTAMPTZ DEFAULT NULL, 
-    "user_id" INT NOT NULL REFERENCES "user"("id"),
-    "library_id" INT NOT NULL REFERENCES "library"("id"),
+    "user_id" INT NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
+    "library_id" INT NOT NULL REFERENCES "library"("id") ON DELETE CASCADE,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ DEFAULT NULL
 );
 
 CREATE TABLE "user_has_tag" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "user_id" INT NOT NULL REFERENCES "user"("id"),
-    "tag_id" INT NOT NULL REFERENCES "tag"("id"),
+    "user_id" INT NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
+    "tag_id" INT NOT NULL REFERENCES "tag"("id") ON DELETE CASCADE,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ DEFAULT NULL
 );
