@@ -28,7 +28,7 @@ module.exports = class Book extends CoreDatamapper {
     }
 
     static async getLastBooks() {
-        const sql = `SELECT * FROM ${this.tableName} ORDER BY "created_at" LIMIT 50`;
+        const sql = `SELECT * FROM ${this.tableName} ORDER BY "created_at" DESC LIMIT 20`;
         const results = await client.query(sql);
         return results.rows;
     }
