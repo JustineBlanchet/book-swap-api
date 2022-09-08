@@ -43,7 +43,7 @@ module.exports = class Loan extends CoreDatamapper {
         JOIN "library" ON "library"."id" = "loan"."library_id"
         JOIN "book" ON "book"."id" = "library"."book_id"
         JOIN "user" ON "user"."id" = "loan"."user_id"
-        ORDER BY "loan"."created_at" DESC LIMIT 50`;
+        ORDER BY "loan"."created_at" DESC LIMIT 10`;
         const results = await client.query(sql);
         return results.rows;
     }
