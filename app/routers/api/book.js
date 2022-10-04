@@ -22,7 +22,7 @@ router.get('/books', controllerHandler(bookController.getBooks));
 // Récupérer les utilisateurs possédant un livre
 /**
   * GET /book/:isbn
-  * @summary Get last books
+  * @summary Get users who own a book
   * @tags Book
   * @param {string} isbn.path.required - Book's ISBN number
   * @return {[UserModel]} 200 - success response - application/json
